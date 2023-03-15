@@ -1,32 +1,42 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <div class="app-container">
+
+    <Nav v-if="show"></Nav>
+
+    <keep-alive>
+      <router-view ></router-view>
+    </keep-alive>
+
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// import Paging from './components/Paging.vue'
+// import Login from './components/Login.vue'
+import Nav from './components/Nav.vue'
 
-nav {
-  padding: 30px;
+export default {
+  components: { Nav },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  data () {
+    return {
+      now: ''
+    }
+  },
+  computed: {
+    show () {
+      if (this.$route.path === '/') return false
+      return true
+    },
+    show_foot () {
+      if (this.$route.path === '/') return false
+      return true
     }
   }
+
 }
+</script>
+
+<style lang="less" scoped>
+
 </style>
